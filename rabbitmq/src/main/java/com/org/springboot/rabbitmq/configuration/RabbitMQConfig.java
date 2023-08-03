@@ -12,61 +12,62 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMQConfig {
-	
+public class RabbitMQConfig
+{
+
 	public static final String QUEUE_A = "queue.A";
 	public static final String QUEUE_B = "queue.B";
-	
+
 	public static final String DIRECT_EXCHANGE = "exchange.direct";
-	
+
 	public static final String ROUTING_A = "routing.A";
 	public static final String ROUTING_B = "routing.B";
-	
+
 	@Bean
-	Queue queueA() {
-		
+	Queue queueA()
+	{
 		return new Queue(QUEUE_A, false);
 	}
+
 	@Bean
-	Queue queueB() {
-		
+	Queue queueB()
+	{
 		return new Queue(QUEUE_B, false);
 	}
-	
+
 	@Bean
-	DirectExchange exchange() {
-		
+	DirectExchange exchange()
+	{
 		return new DirectExchange(DIRECT_EXCHANGE);
 	}
-	
+
 	@Bean
-	Binding binding(Queue queueA, DirectExchange exchange) {
-		
+	Binding binding(Queue queueA, DirectExchange exchange)
+	{
 		return BindingBuilder.bind(queueA)
 				.to(exchange)
 				.with(ROUTING_A);
 	}
-	
+
 	@Bean
-	Binding bindingB(Queue queueB, DirectExchange exchange) {
-		
+	Binding bindingB(Queue queueB, DirectExchange exchange)
+	{
 		return BindingBuilder.bind(queueB)
 				.to(exchange)
 				.with(ROUTING_B);
 	}
 
 	@Bean
-	MessageConverter messageConverter() {
-		
+	MessageConverter messageConverter()
+	{
 		return new Jackson2JsonMessageConverter();
 	}
-	
+
 	@Bean
-	RabbitTemplate rabbitTeamplate(ConnectionFactory factory) {
-		
+	RabbitTemplate rabbitTeamplate(ConnectionFactory factory)
+	{
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(factory);
 		rabbitTemplate.setMessageConverter(messageConverter());
 		return rabbitTemplate;
-		
 	}
 }

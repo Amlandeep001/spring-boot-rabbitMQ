@@ -1,16 +1,13 @@
 package com.org.springboot.rabbitmq.model;
 
 import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-@Getter
-@Setter
-@ToString
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Message {
+public class Message
+{
 
 	int id;
 	String name;
