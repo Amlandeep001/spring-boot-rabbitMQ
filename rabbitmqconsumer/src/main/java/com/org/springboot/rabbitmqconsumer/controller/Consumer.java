@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Consumer
 {
-
 	@RabbitListener(queues = RabbitMQConfig.QUEUE_A)
 	public void receive(Message message)
 	{
@@ -24,5 +23,4 @@ public class Consumer
 	{
 		log.info("Message received from QUEUEB-> {}", message);
 	}
-
 }

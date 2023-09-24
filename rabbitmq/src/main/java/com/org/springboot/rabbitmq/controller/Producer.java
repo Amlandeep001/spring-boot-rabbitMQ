@@ -12,7 +12,6 @@ import com.org.springboot.rabbitmq.model.Message;
 @RestController
 public class Producer
 {
-
 	private final RabbitTemplate rabbitTemplate;
 	private final DirectExchange exchange;
 
@@ -28,5 +27,4 @@ public class Producer
 		rabbitTemplate.convertAndSend(exchange.getName(), RabbitMQConfig.ROUTING_A, message);
 		return "Message sent successfully";
 	}
-
 }
