@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.org.springboot</groupId>
 	<artifactId>rabbitmq</artifactId>
-	<version>1.1,0</version>
+	<version>1.0.0</version>
 	<name>rabbitmq</name>
 	<description>Demo project for Spring Boot Rabbit MQ</description>
 	<properties>
