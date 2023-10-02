@@ -63,10 +63,10 @@ public class RabbitMQConfig
 	}
 
 	@Bean
-	RabbitTemplate rabbitTeamplate(ConnectionFactory factory)
+	RabbitTemplate rabbitTeamplate(ConnectionFactory factory, MessageConverter messageConverter)
 	{
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(factory);
-		rabbitTemplate.setMessageConverter(messageConverter());
+		rabbitTemplate.setMessageConverter(messageConverter);
 		return rabbitTemplate;
 	}
 }
