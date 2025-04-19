@@ -2,7 +2,7 @@ package com.org.springboot.rabbitmqconsumer.configuration;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -18,6 +18,7 @@ public class RabbitMQConfig
 	public static final String QUEUE_B = "queue.B";
 
 	public static final String DIRECT_EXCHANGE = "exchange.direct";
+	public static final String FANOUT_EXCHANGE = "exchange.fanout";
 
 	public static final String ROUTING_A = "routing.A";
 	public static final String ROUTING_B = "routing.B";
@@ -34,12 +35,12 @@ public class RabbitMQConfig
 		return new Queue(QUEUE_B, false);
 	}
 
-	@Bean
+	/*@Bean
 	DirectExchange exchange()
 	{
 		return new DirectExchange(DIRECT_EXCHANGE);
 	}
-
+	
 	@Bean
 	Binding binding(Queue queueA, DirectExchange exchange)
 	{
@@ -47,13 +48,33 @@ public class RabbitMQConfig
 				.to(exchange)
 				.with(ROUTING_A);
 	}
-
+	
 	@Bean
 	Binding bindingB(Queue queueB, DirectExchange exchange)
 	{
 		return BindingBuilder.bind(queueB)
 				.to(exchange)
 				.with(ROUTING_B);
+	}*/
+
+	@Bean
+	FanoutExchange exchange()
+	{
+		return new FanoutExchange(FANOUT_EXCHANGE);
+	}
+
+	@Bean
+	Binding binding(Queue queueA, FanoutExchange exchange)
+	{
+		return BindingBuilder.bind(queueA)
+				.to(exchange);
+	}
+
+	@Bean
+	Binding bindingB(Queue queueB, FanoutExchange exchange)
+	{
+		return BindingBuilder.bind(queueB)
+				.to(exchange);
 	}
 
 	@Bean
